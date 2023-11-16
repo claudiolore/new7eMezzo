@@ -38,34 +38,33 @@ public class Main {
 				do {
 					a = r.nextInt(40);
 					b = r.nextInt(4);
-					
+					a=6;
+					b=0;
+							
 					carta = valori.get(a) + " " + segni[b];
 					System.out.println("la tua carta è: " + carta);
 
-					do {	
-						if (carta.equals(valori.get(6) + " " + segni[0])) 
-						{
-							System.out.println("MATTA!!!! scegli il tuo punteggio (0.5, 1, 2, 3, 4, 5, 6, 7)");
-							sceltaMatta=Float.parseFloat(sc.nextLine());
-							punteggio=punteggio+sceltaMatta;
-							System.out.println("il tuo punteggio è: " + punteggio);
-							break;
-						}
-						if (valori.get(a) <= 7) 
-						{
-							punteggio = punteggio + valori.get(a);
-							System.out.println("il tuo punteggio è: " + punteggio);
-							break;
-						}
-						if (valori.get(a) > 7) 
-						{
-							punteggio = punteggio + 0.5;
-							System.out.println("il tuo punteggio è: " + punteggio);
-							break;
-						}
+					if (carta.equals(valori.get(6) + " " + segni[0])) 
+					{
+						System.out.println("MATTA!!!! scegli il tuo punteggio (0.5, 1, 2, 3, 4, 5, 6, 7)");
+						sceltaMatta=Float.parseFloat(sc.nextLine());
+						punteggio=punteggio+sceltaMatta;
+						System.out.println("il tuo punteggio è: " + punteggio);
 						
 					}
-					while(boh=false);
+					else if (valori.get(a) <= 7) 
+					{
+						punteggio = punteggio + valori.get(a);
+						System.out.println("il tuo punteggio è: " + punteggio);
+						
+					}
+					else if (valori.get(a) > 7) 
+					{
+						punteggio = punteggio + 0.5;
+						System.out.println("il tuo punteggio è: " + punteggio);
+						
+					}
+				
 				}
 				while (scarto.contains(carta));
 
