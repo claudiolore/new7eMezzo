@@ -38,8 +38,6 @@ public class Main {
 				do {
 					a = r.nextInt(40);
 					b = r.nextInt(4);
-					a=6;
-					b=0;
 							
 					carta = valori.get(a) + " " + segni[b];
 					System.out.println("la tua carta è: " + carta);
