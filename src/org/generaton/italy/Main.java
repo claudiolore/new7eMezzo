@@ -22,13 +22,12 @@ public class Main {
 		boh=true;
 		
 		// genero mazzo
-		for (int j = 0; j < 4; j++) {
-			for (int i = 1; i < 11; i++) {
-				valori.add(i);
-				mazzo.add(i + " " + segni[j]);
-			}
-
+		
+		for (int i = 1; i < 11; i++) {
+			valori.add(i);
+			mazzo.add(i + " " + segni[j]);
 		}
+
 
 		// inizio gioco
 		System.out.println("Benvenuto a 7eMezzo");
@@ -36,7 +35,7 @@ public class Main {
 			punteggio=0f;
 			do {
 				do {
-					a = r.nextInt(40);
+					a = r.nextInt(10)+1;
 					b = r.nextInt(4);
 							
 					carta = valori.get(a) + " " + segni[b];
