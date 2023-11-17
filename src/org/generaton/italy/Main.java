@@ -1,94 +1,75 @@
 package org.generaton.italy;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		Scanner sc = new Scanner(System.in);
-		Random r = new Random();
-		int a, b;
-		double punteggio, sceltaMatta;
-		String risposta, carta;
-		String[] segni = { "Denari", "Bastoni", "Coppe", "Spade" };
-		ArrayList<Integer> valori = new ArrayList<>();
-		ArrayList<String> mazzo = new ArrayList<>();
-		ArrayList<String> scarto = new ArrayList<>();
-		boolean boh;
-		boh=true;
+		ArrayList<String> carte=new ArrayList<>();		//elenco di tutte le carte
+		HashSet<Integer> estratte=new HashSet<>();		//elenco delle posizioni estratte
+		String[] semi= {"denari", "bastoni", "coppe", "spade"};
+		float punteggio=0, matta;
 		
-		// genero mazzo
+		Random r=new Random();
+		Scanner sc=new Scanner(System.in);
 		
-		for (int i = 1; i < 11; i++) {
-			valori.add(i);
-			mazzo.add(i + " " + segni[j]);
-		}
-
-
-		// inizio gioco
-		System.out.println("Benvenuto a 7eMezzo");
+		//genero le carte 
+		for (int s=0;s<4;s++)
+			for (int i=1;i<=10;i++)
+				carte.add(i+" di "+semi[s]);
+			
+		//estrazione di una carta
+		int pos;
+		String risposta="";
 		do {
-			punteggio=0f;
 			do {
-				do {
-					a = r.nextInt(10)+1;
-					b = r.nextInt(4);
-							
-					carta = valori.get(a) + " " + segni[b];
-					System.out.println("la tua carta è: " + carta);
-
-					if (carta.equals(valori.get(6) + " " + segni[0])) 
-					{
-						System.out.println("MATTA!!!! scegli il tuo punteggio (0.5, 1, 2, 3, 4, 5, 6, 7)");
-						sceltaMatta=Float.parseFloat(sc.nextLine());
-						punteggio=punteggio+sceltaMatta;
-						System.out.println("il tuo punteggio è: " + punteggio);
-						
-					}
-					else if (valori.get(a) <= 7) 
-					{
-						punteggio = punteggio + valori.get(a);
-						System.out.println("il tuo punteggio è: " + punteggio);
-						
-					}
-					else if (valori.get(a) > 7) 
-					{
-						punteggio = punteggio + 0.5;
-						System.out.println("il tuo punteggio è: " + punteggio);
-						
-					}
-				
-				}
-				while (scarto.contains(carta));
-
-				mazzo.add(carta);
-
-				if (punteggio > 7.5) 
-				{
-					System.out.println("HAI CANNATO");
-					break;
-				}
-				if(punteggio==7.5)
-				{
-					System.out.println("COMPLIMENTI HAI VINTOOOOO!!!!");
-					break;
-				}
-
-				System.out.println("vuoi un'altra carta?(si/no)");
-				risposta = sc.nextLine();
-
+				pos=r.nextInt(40);		//da 0 a 39
+			} while (estratte.contains(pos));	//se l'ho già estratta torno indietro
+			estratte.add(pos);		//non può essere più estratto
+			System.out.println("E' uscito: "+carte.get(pos));
+			
+			carte.get(pos).equals("10 di denari");
+		
+			if(pos==9) {
+				System.out.println("Matta, scegli il tuo punteggio:(0.5, 1, 2, 3, 4, 5, 6, 7)");
+				matta=Float.parseFloat(sc.nextLine());
+				punteggio+=matta;
 			}
-			while (risposta.equals("si"));
-
-			System.out.println("Vuoi giocare ancora?");
-			risposta=sc.nextLine();
-		}
-		while (risposta.equals("si"));
+			else 
+			{
+				pos=pos%10;		//ho sempre un valore da 0 a 9 (ad es. se pos vale 23 => 3)
+				if (pos<7)
+				{
+					punteggio+=pos+1;
+				}
+				else 
+				{
+					punteggio+=0.5f;
+				}
+			}
+				
+			System.out.println("Punteggio: "+punteggio);
+			
+			if (punteggio>7.5f)
+				System.out.println("Hai sballato!");
+			else if (punteggio<7.5f) {
+				System.out.println("\nVuoi continuare (s/n)");
+				risposta=sc.nextLine();	
+			}
+			
+		} while(risposta.equals("si") && punteggio<7.5);
+		System.out.println("Grazie e arrivederci!");
 		sc.close();
 	}
 
 }
+			
+			
+			
+			
+			
+			
+			
